@@ -1,0 +1,23 @@
+name: Autograding
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: Instalar CMake
+        run: sudo apt-get install -y cmake
+
+      - name: Configurar y compilar
+        run: |
+          cmake -B build
+          cmake --build build
+
+      - name: Ejecutar pruebas
+        run: ./build/tests
